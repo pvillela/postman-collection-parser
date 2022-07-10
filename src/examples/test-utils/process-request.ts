@@ -14,6 +14,6 @@ export function processRequest(
   reqMethod: string,
   reqBody: unknown,
   expectedStatus: number
-): unknown {
-  return undefined
+): Promise<unknown> {
+  return Promise.resolve(undefined)
 }

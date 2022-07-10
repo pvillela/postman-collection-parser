@@ -25,14 +25,14 @@ test("${testName}", () => {
 ${indent(JSON.stringify(reqBody, null, 2), 4)}
   
   // This call sends the request to the target endpoint, asserts the expected response code,
-  // and transforms the response body if required.
-  const resBody = processRequest(path, reqMethod, reqBody, expectedStatus)
+  // and transforms the response body if required. It returns a promise.
+  const pResBody = processRequest(path, reqMethod, reqBody, expectedStatus)
   
   // Assertions
   
-  expect(true).toBe(true)
-  
   // TODO: fix test assertions
+  
+  expect(true).toBe(true)
   
 ${indent(testArr.join("\n"), 1, "  // ")}
 })
