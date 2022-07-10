@@ -6,6 +6,11 @@
 
 module.exports = {
   root: true,
+  settings: {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   plugins: [
     "@typescript-eslint",
     // "eslint-comments",
