@@ -24,7 +24,10 @@
     //    ],
     // Uncomment and modify section below if necessary
     // (from https://github.com/microsoft/TypeScript-Node-Starter/blob/master/tsconfig.json)
-    //    "baseUrl": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"],
+    }
     //    "paths": {
     //      "*": [
     //        "node_modules/*",

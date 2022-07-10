@@ -1,5 +1,5 @@
 import { config } from "./config";
-import { parseCollection } from "../lib/parse-collection";
+import { parseCollection } from "@src/lib/parse-collection";
 import { template } from "./template";
 import { CollectionDefinition } from "postman-collection";
 

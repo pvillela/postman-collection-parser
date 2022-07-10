@@ -6,7 +6,8 @@
   "types": "dist/index.d.js",
   "scripts": {
     "compile": "tsc --build tsconfig.production.json",
-    "test": "jest"
+    "test": "jest",
+    "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/examples/conduit-example.js"
   },
   "repository": {
   },
@@ -16,9 +17,15 @@
   ],
   "author": "Paulo Villela",
   "license": "MIT",
+  "_moduleAliases": {
+    "@src": "dist"
+  },
   "dependencies": {
     "axios": "^0.27.2",
-    "newman": "^5.3.2"
+    "newman": "^5.3.2",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -38,10 +45,13 @@
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.2",
     "prettier": "^2.7.1",
-    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "tsconfig-paths-jest-mapper": "^1.4.0",
+    "ts-jest": "^28.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4",
     "typedoc": "^0.23.5",
-    "typedoc-plugin-markdown": "^3.13.2"
+    "typedoc-plugin-markdown": "^3.13.2",
+    "typescript-module-alias": "^2.2.8"
   }
 }

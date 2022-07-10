@@ -1,5 +1,5 @@
-export function indent(str: string, count: number, indent: string = " "): string {
-  return str.replace(/^/gm, indent.repeat(count));
+export function indent(str: string, count: number, indentation: string = " "): string {
+  return str.replace(/^/gm, indentation.repeat(count));
 }
 
 export function template(
@@ -9,7 +9,7 @@ export function template(
   reqBody: unknown,
   testArr: string[]
 ): string {
-  return `import { processRequest } from "../../test-utils/process-request"
+  return `import { processRequest } from "@src/examples/test-utils/process-request"
 
 test("${testName}", () => {
   // Test preparation
@@ -21,6 +21,8 @@ test("${testName}", () => {
   const reqBody = 
 ${indent(JSON.stringify(reqBody, null, 2), 4)}
   
+  // This call sends the request to the target endpoint, asserts the expected response code,
+  // and transforms the response body if required.
   const resBody = processRequest(path, reqMethod, reqBody, expectedStatus)
   
   // Assertions
