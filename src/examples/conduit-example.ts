@@ -5,4 +5,4 @@ import { CollectionDefinition } from "postman-collection";
 
 const coll: CollectionDefinition = require("../../postman-collections/Conduit.postman_collection.json")
 
-parseCollection(config.outDir, coll, template).catch((err) => console.log(err))
+parseCollection(config.outDir, coll, template, 3).catch((err) => console.log(err))

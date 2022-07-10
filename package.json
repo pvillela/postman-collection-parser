@@ -1,13 +1,14 @@
 {
   "name": "postman-collection-parser",
   "version": "1.0.0",
-  "description": "Library that converts a Postman collection into a directory structure with text files.",
+  "description": "Library that converts a Postman collection into a directory structure with test files.",
   "main": "dist/lib/parse-collection.js",
   "types": "dist/lib/parse-collection.d.js",
   "scripts": {
     "compile": "tsc --build tsconfig.production.json",
     "test": "jest",
-    "example": "ts-node -r tsconfig-paths/register src/examples/conduit-example.ts"
+    "example-gen": "ts-node -r tsconfig-paths/register src/examples/conduit-example.ts",
+    "example-test": "jest src/examples/out/tests/Conduit/*"
   },
   "repository": {
     "type": "git",

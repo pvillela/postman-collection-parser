@@ -1,22 +1,25 @@
-export function indent(str: string, count: number, indentation: string = " "): string {
-  return str.replace(/^/gm, indentation.repeat(count));
-}
-
 export function template(
   testName: string,
   reqMethod: string,
   path: string,
   reqBody: unknown,
-  testArr: string[]
+  testArr: string[],
+  dirDepth: number
 ): string {
-  return `import { processRequest } from "@src/examples/test-utils/process-request"
+  const importPrefix = "../".repeat(dirDepth)
+
+  return `// import with path alias
+import { processRequest } from "@src/examples/test-utils/process-request"
+
+// import without path alias
+// import { processRequest } from "${importPrefix}test-utils/process-request"
 
 test("${testName}", () => {
   // Test preparation
   
   const reqMethod = "${reqMethod}"
   const path = "${path}"
-  const expectedStatus = <PUT EXPECTED RESPONSE STATUS NUMBER HERE>
+  const expectedStatus = 9999 // TODO: put expected status here
   
   const reqBody = 
 ${indent(JSON.stringify(reqBody, null, 2), 4)}
@@ -27,7 +30,16 @@ ${indent(JSON.stringify(reqBody, null, 2), 4)}
   
   // Assertions
   
-${indent(testArr.join("\n"), 2)}
+  expect(true).toBe(true)
+  
+  // TODO: fix test assertions
+  
+${indent(testArr.join("\n"), 1, "  // ")}
 })
 `
 }
+
+function indent(str: string, count: number, indentation: string = " "): string {
+  return str.replace(/^/gm, indentation.repeat(count));
+}
+

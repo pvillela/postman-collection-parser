@@ -1,18 +1,37 @@
 import { promises as fsp } from "fs";
 import { CollectionDefinition } from "postman-collection"
 
+/**
+ * Type of template function passed to parseCollection. The function parameters are
+ * populated from the parsed Postman collection. The two non-obvious parameters are:
+ *  - testArr: An array with the contents of the Tests tab for the test case.
+ *  - dirDepth: The depth of the generated test file in the generated directory structure,
+ *    computed with respect to a baseDirDepth passed to parseCollection.
+ */
 export type Template = (
   testName: string,
   reqMethod: string,
-  path: string,
+  reqPath: string,
   reqBody: unknown,
-  testArr: string[]
+  testArr: string[],
+  dirDepth: number,
 ) => string
 
+/**
+ * Converts a Postman collection into a directory structure with test files.
+ *
+ * @param outDir Base output directory.
+ * @param coll Postman collection to be parsed.
+ * @param template Template function used to generate test file contents.
+ * @param baseDirDepth Relative depth of the base directory where the generated test directory
+ *  structure will be located, computed with respect to a base directory from which imports
+ *  will be defined in the template. This is needed if path aliases are not used for imports.
+ */
 export async function parseCollection(
   outDir: string,
   coll: CollectionDefinition,
-  template: Template
+  template: Template,
+  baseDirDepth: number = 0
 ): Promise<void> {
   if (!await pathExists(outDir)) await fsp.mkdir(outDir, { recursive: true })
 
@@ -24,7 +43,7 @@ export async function parseCollection(
   const collItems = coll.item
   const completion: Promise<void>[] = []
   for (let i = 0; collItems && i < collItems.length; ++i) {
-    completion.push(handleItem(collDir, collItems[i], template))
+    completion.push(handleItem(collDir, collItems[i], template, baseDirDepth))
   }
   await Promise.all(completion)
 }
@@ -35,7 +54,8 @@ export async function parseCollection(
 async function handleItem(
   parentDir: string,
   item: any,
-  template: Template
+  template: Template,
+  dirDepth: number,
 ): Promise<void> {
   // if (++numCalls > maxCalls) return // for development only
 
@@ -47,7 +67,7 @@ async function handleItem(
     await fsp.mkdir(subDir)
     const completion: Promise<void>[] = []
     for (let i = 0; subItems && i < subItems.length; ++i) {
-      completion.push(handleItem(subDir, subItems[i], template))
+      completion.push(handleItem(subDir, subItems[i], template, dirDepth+1))
     }
     await Promise.all(completion)
   } else {
@@ -76,8 +96,8 @@ async function handleItem(
     }
 
     await fsp.writeFile(
-      `${parentDir}/${name}.txt`,
-      template(name, reqMethod, path, reqBody, testArr)
+      `${parentDir}/${name}.ts`,
+      template(name, reqMethod, path, reqBody, testArr, dirDepth)
     )
   }
 }
