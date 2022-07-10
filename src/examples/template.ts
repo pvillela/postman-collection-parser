@@ -14,7 +14,7 @@ import { processRequest } from "@src/examples/test-utils/process-request"
 // import without path alias
 // import { processRequest } from "${importPrefix}test-utils/process-request"
 
-test("${testName}", () => {
+test("${testName}", async () => {
   // Test preparation
   
   const reqMethod = "${reqMethod}"
@@ -25,8 +25,8 @@ test("${testName}", () => {
 ${indent(JSON.stringify(reqBody, null, 2), 4)}
   
   // This call sends the request to the target endpoint, asserts the expected response code,
-  // and transforms the response body if required. It returns a promise.
-  const pResBody = processRequest(path, reqMethod, reqBody, expectedStatus)
+  // and transforms the response body if required.
+  const resBody = await processRequest(path, reqMethod, reqBody, expectedStatus)
   
   // Assertions
   
