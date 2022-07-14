@@ -17,7 +17,7 @@ export default {
   // clearMocks: false,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
+  collectCoverage: false,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
@@ -156,10 +156,10 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/*-test.ts",
-  //   "**/tests/**/*.ts"
-  // ],
+  testMatch: [
+    "**/*-test.ts",
+    "**/tests/**/*.ts"
+  ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -168,7 +168,7 @@ export default {
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
-  testRegex: "(/__tests__/.*|/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  // testRegex: "(/__tests__/.*|/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,
@@ -193,7 +193,7 @@ export default {
   // unmockedModulePathPatterns: undefined,
 
   // Indicates whether each individual test should be reported during the run
-  // verbose: undefined,
+  verbose: false,
 
   // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
   // watchPathIgnorePatterns: [],

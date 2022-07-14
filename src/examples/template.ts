@@ -9,10 +9,13 @@ export function template(
   const importPrefix = "../".repeat(dirDepth)
 
   return `// import with path alias
-import { processRequest } from "@src/examples/test-utils/process-request"
+import * as tu from "@src/examples/test-utils"
 
 // import without path alias
-// import { processRequest } from "${importPrefix}test-utils/process-request"
+// import * as tu from "${importPrefix}test-utils"
+  
+const reqBody = 
+${indent(JSON.stringify(reqBody, null, 2), 2)}
 
 test("${testName}", async () => {
   // Test preparation
@@ -21,12 +24,9 @@ test("${testName}", async () => {
   const path = "${path}"
   const expectedStatus = 9999 // TODO: put expected status here
   
-  const reqBody = 
-${indent(JSON.stringify(reqBody, null, 2), 4)}
-  
   // This call sends the request to the target endpoint, asserts the expected response code,
   // and transforms the response body if required.
-  const resBody = await processRequest(path, reqMethod, reqBody, expectedStatus)
+  const resBody = await tu.processRequest(path, reqMethod, reqBody, expectedStatus)
   
   // Assertions
   
