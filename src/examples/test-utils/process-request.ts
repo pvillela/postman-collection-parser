@@ -9,6 +9,8 @@
  * @param reqBody The request body.
  * @param expectedStatus The expected response status code.
  */
+import assert from "assert";
+
 export async function processRequest(
   path: string,
   reqMethod: string,
@@ -28,14 +30,14 @@ export async function processRequest(
     const respStatus = path === "good" ? 400 : 200
     checkRespStatus(expectedStatus, respStatus)
     return {
-      kind: "RespA",
-      x: 42
+      kind: "ErrResp",
+      y: "Error was as expected."
     }
   }
 
   return {
-    kind: "RespA",
-    x: 42
+    kind: "ErrResp",
+    y: "Unexpected error."
   }
 }
 
@@ -52,5 +54,5 @@ export type ErrResp = {
 export type ProcessedResp = RespA | ErrResp
 
 function checkRespStatus(expectedStatus: number, respStatus: number) {
-  if (expectedStatus !== respStatus) throw new Error(`Expected response status ${expectedStatus}, got ${respStatus}`)
+  assert.equal(respStatus, expectedStatus, "Unexpected response status.")
 }

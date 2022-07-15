@@ -8,7 +8,9 @@ export function template(
 ): string {
   const importPrefix = "../".repeat(dirDepth)
 
-  return `// import with path alias
+  return `import assert from "assert"
+
+// import with path alias
 import * as tu from "@src/examples/test-utils"
 
 // import without path alias
@@ -33,6 +35,8 @@ test("${testName}", async () => {
   // TODO: fix test assertions
   
   expect(true).toBe(true)
+  assert(true, "dummy assertion")
+  assert.equal(1, 1, "one is one")
   
 ${indent(testArr.join("\n"), 1, "  // ")}
 })
