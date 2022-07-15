@@ -3,7 +3,7 @@ export function template(
   reqMethod: string,
   path: string,
   reqBody: unknown,
-  testArr: string[],
+  testArr: string[] | undefined,
   dirDepth: number
 ): string {
   const importPrefix = "../".repeat(dirDepth)
@@ -38,12 +38,11 @@ test("${testName}", async () => {
   assert(true, "dummy assertion")
   assert.equal(1, 1, "one is one")
   
-${indent(testArr.join("\n"), 1, "  // ")}
+${indent(testArr?.join("\n"), 1, "  // ")}
 })
 `
 }
 
-function indent(str: string, count: number, indentation: string = " "): string {
-  return str.replace(/^/gm, indentation.repeat(count));
+function indent(str: string | undefined, count: number, indentation: string = " "): string {
+  return str?.replace(/^/gm, indentation.repeat(count)) || ""
 }
-

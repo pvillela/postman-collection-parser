@@ -7,7 +7,7 @@
   "scripts": {
     "compile": "tsc --build tsconfig.production.json",
     "test": "jest",
-    "example-gen": "ts-node -r tsconfig-paths/register src/examples/conduit-example.ts",
+    "example-gen": "ts-node -r tsconfig-paths/register src/examples/conduit-example-typed.ts",
     "example-test": "jest src/examples/out/tests/Conduit/*"
   },
   "repository": {
