@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "watch": false
-  },
-  "exclude": [
-    "node_modules", "src/test"
-  ]
-}

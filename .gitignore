@@ -146,7 +146,7 @@ dist
 bin
 
 # ignore output directories
-out
+go/out
 
 # ignore overflow Directories
 overflow
