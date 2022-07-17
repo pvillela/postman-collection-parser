@@ -1,4 +1,4 @@
-module github.com/pvillela/postman-collection-parser/go
+module github.com/pvillela/postman-collection-parser/go-example
 
 go 1.18
 
